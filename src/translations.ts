@@ -67,6 +67,8 @@ export const translations = {
     log_group: "运行日志与性能",
     max_log_lines: "控制台最大行数",
     tray_label: "最小化到系统托盘",
+    tray_show: "显示窗口",
+    tray_quit: "退出程序",
     finish_settings: "完成设置",
     
     // 终端与提示
@@ -150,6 +152,8 @@ export const translations = {
     log_group: "Logs & Performance",
     max_log_lines: "Max Console Lines",
     tray_label: "Minimize to Tray",
+    tray_show: "Show Window",
+    tray_quit: "Quit Llama Control",
     finish_settings: "DONE",
     
     terminal_title: "System Console",

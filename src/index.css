@@ -2,50 +2,80 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Google Fonts Import */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
 @layer base {
   :root {
-    --background: 210 20% 98%;
-    --foreground: 224 71% 4%;
+    /* Light Theme - Soft Purple Tones */
+    --background: 267 50% 98%;
+    --foreground: 268 40% 8%;
+
     --card: 0 0% 100%;
-    --card-foreground: 224 71% 4%;
+    --card-foreground: 268 40% 8%;
+
     --popover: 0 0% 100%;
-    --popover-foreground: 224 71% 4%;
-    --primary: 221.2 83.2% 53.3%;
+    --popover-foreground: 268 40% 8%;
+
+    --primary: 267 89% 54%;
     --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-    --destructive: 0 84.2% 60.2%;
+
+    --secondary: 267 30% 94%;
+    --secondary-foreground: 268 40% 8%;
+
+    --muted: 267 30% 94%;
+    --muted-foreground: 268 15% 45%;
+
+    --accent: 267 30% 94%;
+    --accent-foreground: 268 40% 8%;
+
+    --destructive: 0 84% 60%;
     --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 221.2 83.2% 53.3%;
-    --radius: 0.75rem;
+
+    --border: 267 30% 88%;
+    --input: 267 30% 88%;
+    --ring: 267 89% 54%;
+
+    --radius: 1.25rem;
+
+    /* Gradient colors */
+    --gradient-start: 267 89% 54%;
+    --gradient-end: 189 89% 54%;
   }
 
   .dark {
-    --background: 224 71% 4%;
-    --foreground: 210 40% 98%;
-    --card: 224 71% 4%;
-    --card-foreground: 210 40% 98%;
-    --popover: 224 71% 4%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 217.2 91.2% 59.8%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 224.3 76.3% 48%;
+    /* Dark Theme - Deep Space Purple */
+    --background: 268 50% 8%;
+    --foreground: 267 40% 96%;
+
+    --card: 268 40% 10%;
+    --card-foreground: 267 40% 96%;
+
+    --popover: 268 40% 10%;
+    --popover-foreground: 267 40% 96%;
+
+    --primary: 267 89% 54%;
+    --primary-foreground: 268 40% 10%;
+
+    --secondary: 268 30% 14%;
+    --secondary-foreground: 267 40% 96%;
+
+    --muted: 268 30% 14%;
+    --muted-foreground: 267 15% 65%;
+
+    --accent: 268 30% 14%;
+    --accent-foreground: 267 40% 96%;
+
+    --destructive: 0 72% 50%;
+    --destructive-foreground: 267 40% 96%;
+
+    --border: 267 30% 20%;
+    --input: 267 30% 20%;
+    --ring: 267 89% 54%;
+
+    /* Gradient colors for dark theme */
+    --gradient-start: 267 89% 54%;
+    --gradient-end: 189 89% 54%;
   }
 }
 
@@ -53,30 +83,257 @@
   * {
     @apply border-border;
   }
+
+  html {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+
   body {
-    @apply bg-background text-foreground font-sans antialiased;
+    @apply bg-background text-foreground font-body antialiased;
     font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Outfit', sans-serif;
+  }
+
+  code, pre, .font-mono {
+    font-family: 'JetBrains Mono', monospace;
   }
 }
 
-/* 磨砂玻璃效果 */
-.glass {
-  @apply bg-white/70 backdrop-blur-md border-white/20 dark:bg-black/40 dark:border-white/10;
+/* ============================================
+   BACKGROUND ATMOSPHERE LAYER
+   ============================================ */
+
+.bg-atmosphere {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  overflow: hidden;
 }
 
-/* 自定义滚动条 */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+.bg-atmosphere-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg,
+    hsl(268 50% 8%) 0%,
+    hsl(275 40% 12%) 50%,
+    hsl(260 40% 10%) 100%
+  );
 }
+
+.light .bg-atmosphere-gradient {
+  background: linear-gradient(135deg,
+    hsl(267 50% 98%) 0%,
+    hsl(260 40% 96%) 50%,
+    hsl(275 30% 98%) 100%
+  );
+}
+
+/* Noise texture overlay */
+.bg-atmosphere-noise {
+  position: absolute;
+  inset: 0;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+/* Floating glow orbs */
+.bg-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.35;
+  animation: float 12s ease-in-out infinite;
+}
+
+.bg-orb-1 {
+  width: 400px;
+  height: 400px;
+  top: -100px;
+  right: -100px;
+  background: radial-gradient(circle, hsl(267 89% 54%) 0%, transparent 70%);
+  animation-delay: 0s;
+}
+
+.bg-orb-2 {
+  width: 300px;
+  height: 300px;
+  bottom: -50px;
+  left: -50px;
+  background: radial-gradient(circle, hsl(189 89% 54%) 0%, transparent 70%);
+  animation-delay: -4s;
+}
+
+.bg-orb-3 {
+  width: 200px;
+  height: 200px;
+  top: 50%;
+  left: 50%;
+  background: radial-gradient(circle, hsl(280 80% 60%) 0%, transparent 70%);
+  animation-delay: -8s;
+  animation-name: float, pulse-glow;
+  animation-duration: 12s, 6s;
+  animation-iteration-count: infinite, infinite;
+}
+
+.light .bg-orb {
+  opacity: 0.15;
+}
+
+/* ============================================
+   GLASS MORPHISM UTILITIES
+   ============================================ */
+
+.glass {
+  @apply bg-white/70 backdrop-blur-xl border border-white/20 dark:bg-black/30 dark:border-white/10;
+}
+
+.glass-strong {
+  @apply bg-white/85 backdrop-blur-2xl border border-white/30 dark:bg-black/40 dark:border-white/10;
+}
+
+.glass-card {
+  @apply glass-strong rounded-3xl shadow-2xl;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.dark .glass-card {
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* ============================================
+   GRADIENT UTILITIES
+   ============================================ */
+
+.gradient-primary {
+  background: linear-gradient(135deg,
+    hsl(var(--gradient-start)) 0%,
+    hsl(var(--gradient-end)) 100%
+  );
+}
+
+.gradient-border {
+  position: relative;
+  background: inherit;
+  border-radius: inherit;
+}
+
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg,
+    hsl(var(--gradient-start)) 0%,
+    hsl(var(--gradient-end)) 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* ============================================
+   CUSTOM SCROLLBAR
+   ============================================ */
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
 ::-webkit-scrollbar-track {
   @apply bg-transparent;
 }
+
 ::-webkit-scrollbar-thumb {
-  @apply bg-muted rounded-full hover:bg-muted-foreground/30 transition-colors;
+  @apply rounded-full;
+  background: hsl(var(--muted-foreground) / 0.3);
+  transition: background 0.2s;
 }
 
-/* 按钮点击动画 */
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground) / 0.5);
+}
+
+/* ============================================
+   ANIMATION UTILITIES
+   ============================================ */
+
+.stagger-container > * {
+  opacity: 0;
+  animation: fade-in-up 0.5s ease-out forwards;
+}
+
+.stagger-container > *:nth-child(1) { animation-delay: 0.05s; }
+.stagger-container > *:nth-child(2) { animation-delay: 0.1s; }
+.stagger-container > *:nth-child(3) { animation-delay: 0.15s; }
+.stagger-container > *:nth-child(4) { animation-delay: 0.2s; }
+.stagger-container > *:nth-child(5) { animation-delay: 0.25s; }
+.stagger-container > *:nth-child(6) { animation-delay: 0.3s; }
+
+/* ============================================
+   COMPONENT STYLES
+   ============================================ */
+
+/* Card hover effect */
+.card-hover {
+  @apply transition-all duration-300;
+}
+
+.card-hover:hover {
+  @apply scale-[1.01];
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.2),
+    0 0 0 1px hsl(var(--primary) / 0.1);
+}
+
+.dark .card-hover:hover {
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.5),
+    0 0 0 1px hsl(var(--primary) / 0.15);
+}
+
+/* Button click effect */
 button:active {
-  transform: scale(0.98);
+  @apply scale-[0.98];
+}
+
+/* Input focus glow */
+.input-glow:focus {
+  @apply outline-none;
+  box-shadow: 0 0 0 3px hsl(var(--ring) / 0.2);
+}
+
+/* ============================================
+   TEXT GRADIENT
+   ============================================ */
+
+.text-gradient {
+  @apply bg-clip-text text-transparent;
+  background-image: linear-gradient(135deg,
+    hsl(var(--gradient-start)) 0%,
+    hsl(var(--gradient-end)) 100%
+  );
+}
+
+/* ============================================
+   LOG HIGHLIGHT ANIMATION
+   ============================================ */
+
+.log-highlight {
+  animation: log-flash 0.5s ease-out;
+}
+
+@keyframes log-flash {
+  0% { color: hsl(var(--primary)); text-shadow: 0 0 10px hsl(var(--primary) / 0.5); }
+  100% { color: inherit; text-shadow: none; }
 }
