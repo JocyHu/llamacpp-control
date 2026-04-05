@@ -1,80 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Google Fonts Import */
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
-
 @layer base {
   :root {
-    /* Light Theme - Soft Purple Tones */
-    --background: 267 50% 98%;
-    --foreground: 268 40% 8%;
+    /* iOS Light Mode - Soft White Glass */
+    --background-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    --island-bg: rgba(255, 255, 255, 0.45);
+    --island-border: rgba(255, 255, 255, 0.5);
+    
+    --background: 210 20% 98%;
+    --foreground: 0 0% 0%;
 
     --card: 0 0% 100%;
-    --card-foreground: 268 40% 8%;
+    --card-foreground: 0 0% 0%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 268 40% 8%;
+    --popover-foreground: 0 0% 0%;
 
-    --primary: 267 89% 54%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 211 100% 50%; /* iOS Blue #007AFF */
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 267 30% 94%;
-    --secondary-foreground: 268 40% 8%;
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 0%;
 
-    --muted: 267 30% 94%;
-    --muted-foreground: 268 15% 45%;
+    --muted: 0 0% 90%;
+    --muted-foreground: 0 0% 40%;
 
-    --accent: 267 30% 94%;
-    --accent-foreground: 268 40% 8%;
+    --accent: 211 100% 50%;
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 100% 50%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 267 30% 88%;
-    --input: 267 30% 88%;
-    --ring: 267 89% 54%;
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
+    --ring: 211 100% 50%;
 
     --radius: 1.25rem;
 
-    /* Gradient colors */
-    --gradient-start: 267 89% 54%;
+    /* Legacy Gradient Support */
+    --gradient-start: 211 100% 50%;
     --gradient-end: 189 89% 54%;
   }
 
   .dark {
-    /* Dark Theme - Deep Space Purple */
-    --background: 268 50% 8%;
-    --foreground: 267 40% 96%;
+    /* iOS Dark Mode - Deep Space */
+    --background-gradient: radial-gradient(circle at top right, #1c1c1e 0%, #000000 100%);
+    --island-bg: rgba(28, 28, 30, 0.7);
+    --island-border: rgba(255, 255, 255, 0.1);
+    
+    --background: 240 10% 4%;
+    --foreground: 0 0% 100%;
 
-    --card: 268 40% 10%;
-    --card-foreground: 267 40% 96%;
+    --card: 240 6% 11%;
+    --card-foreground: 0 0% 100%;
 
-    --popover: 268 40% 10%;
-    --popover-foreground: 267 40% 96%;
+    --popover: 240 6% 11%;
+    --popover-foreground: 0 0% 100%;
 
-    --primary: 267 89% 54%;
-    --primary-foreground: 268 40% 10%;
+    --primary: 211 100% 52%; /* iOS Dark Blue #0A84FF */
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 268 30% 14%;
-    --secondary-foreground: 267 40% 96%;
+    --secondary: 240 4% 16%;
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: 268 30% 14%;
-    --muted-foreground: 267 15% 65%;
+    --muted: 240 4% 16%;
+    --muted-foreground: 240 5% 65%;
 
-    --accent: 268 30% 14%;
-    --accent-foreground: 267 40% 96%;
+    --accent: 211 100% 52%;
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 72% 50%;
-    --destructive-foreground: 267 40% 96%;
+    --destructive: 0 100% 60%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 267 30% 20%;
-    --input: 267 30% 20%;
-    --ring: 267 89% 54%;
+    --border: 240 4% 16%;
+    --input: 240 4% 16%;
+    --ring: 211 100% 52%;
 
-    /* Gradient colors for dark theme */
-    --gradient-start: 267 89% 54%;
+    /* Legacy Gradient Support */
+    --gradient-start: 211 100% 52%;
     --gradient-end: 189 89% 54%;
   }
 }
@@ -102,6 +109,22 @@
   }
 }
 
+@layer components {
+  .ios-glass {
+    @apply backdrop-blur-[40px] saturate-[180%] border;
+    background: var(--island-bg);
+    border-color: var(--island-border);
+  }
+  
+  .ios-island-sidebar {
+    @apply ios-glass rounded-ios-sidebar shadow-2xl;
+  }
+  
+  .ios-island-content {
+    @apply ios-glass rounded-ios-content shadow-2xl;
+  }
+}
+
 /* ============================================
    BACKGROUND ATMOSPHERE LAYER
    ============================================ */
@@ -117,19 +140,7 @@
 .bg-atmosphere-gradient {
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg,
-    hsl(268 50% 8%) 0%,
-    hsl(275 40% 12%) 50%,
-    hsl(260 40% 10%) 100%
-  );
-}
-
-.light .bg-atmosphere-gradient {
-  background: linear-gradient(135deg,
-    hsl(267 50% 98%) 0%,
-    hsl(260 40% 96%) 50%,
-    hsl(275 30% 98%) 100%
-  );
+  background: var(--background-gradient) !important;
 }
 
 /* Noise texture overlay */
