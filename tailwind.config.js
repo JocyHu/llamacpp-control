@@ -57,6 +57,10 @@ module.exports = {
         },
       },
       borderRadius: {
+        'ios-sidebar': '28px',
+        'ios-content': '32px',
+        'ios-item': '14px',
+        'ios-btn': '16px',
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
