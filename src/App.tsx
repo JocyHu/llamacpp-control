@@ -157,6 +157,13 @@ export default function App() {
       min_p: 0.0,
       presence_penalty: 0.0,
       repeat_penalty: 1.0,
+      use_temp: true,
+      use_presence_penalty: true,
+      use_top_p: true,
+      use_top_k: true,
+      use_min_p: true,
+      use_repeat_penalty: true,
+      use_batch_size: true,
       custom_args: null,
     };
     const newConfig: AppConfig = { 
