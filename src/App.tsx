@@ -19,7 +19,7 @@ import {
 } from '@dnd-kit/sortable';
 import { SortableProfileItem } from './components/SortableProfileItem';
 import { 
-  Settings, Play, Square, Plus, Trash2, Terminal, Save,
+  Settings, Play, Square, Plus, Terminal, Save,
   Zap, Activity, Monitor, FolderOpen, Code2, HardDrive, Sparkles,
   Lock, Thermometer, Lightbulb, CheckCircle2, AlertCircle, FolderTree,
   FileCode2, Box, Eye, EyeOff, Key, X, Palette, Globe, Binary, History, Moon, Sun, Laptop
