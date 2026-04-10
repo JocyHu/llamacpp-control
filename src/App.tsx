@@ -17,7 +17,7 @@ function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-const CACHE_TYPES = ["f16", "q8_0", "q4_0", "q4_1", "q5_0", "q5_1"];
+const CACHE_TYPES = ["f32", "f16", "bf16", "q8_0", "q4_0", "q4_1", "iq4_nl", "q5_0", "q5_1", "turbo4", "turbo3", "turbo2"];
 
 interface Toast {
   message: string;
