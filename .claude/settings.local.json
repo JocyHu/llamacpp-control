@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(scripts/start-server.sh --project-dir \"C:\\\\Users\\\\admin\\\\Documents\\\\mycode\\\\launcher-gui\")"
+    ]
+  }
+}
