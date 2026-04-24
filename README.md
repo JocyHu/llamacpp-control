@@ -1,9 +1,6 @@
 # 🦙 llamacpp-control
 
-<img width="2285" height="1510" alt="image" src="https://github.com/user-attachments/assets/f4ba0712-15f2-4b29-a5de-073443962c73" />
-
-
-
+<img width="2269" height="1499" alt="image" src="https://github.com/user-attachments/assets/df810732-c316-4504-8371-60f31b13951b" />
 
 [English](#english) | [简体中文](#简体中文)
 
