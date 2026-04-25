@@ -50,6 +50,7 @@ pub struct Profile {
     pub use_min_p: bool,
     pub use_repeat_penalty: bool,
     pub use_batch_size: bool,
+    pub use_ubatch_size: bool,
     pub custom_args: Option<String>, // 新增：自定义高级参数
 }
 

@@ -55,6 +55,7 @@ export interface Profile {
   use_min_p: boolean;
   use_repeat_penalty: boolean;
   use_batch_size: boolean;
+  use_ubatch_size: boolean;
   
   // 自定义高级参数
   custom_args: string | null;
