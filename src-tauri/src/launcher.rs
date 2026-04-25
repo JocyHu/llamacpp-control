@@ -109,7 +109,7 @@ fn generate_ini_content(profile: &Profile, detected: &[DetectedModel]) -> String
     ini_content.push_str(&format!("ubatch-size = {}\n", profile.ubatch_size));
     if !profile.cache_type_k.is_empty() { ini_content.push_str(&format!("cache-type-k = {}\n", profile.cache_type_k)); }
     if !profile.cache_type_v.is_empty() { ini_content.push_str(&format!("cache-type-v = {}\n", profile.cache_type_v)); }
-    if profile.jinja { ini_content.push_str("jinja = true\n"); }
+    ini_content.push_str(&format!("jinja = {}\n", if profile.jinja { "true" } else { "false" }));
     if let Some(ref template) = profile.chat_template_file {
         if !template.is_empty() { ini_content.push_str(&format!("chat-template-file = {}\n", template.replace("\\", "/"))); }
     }
