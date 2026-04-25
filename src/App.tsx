@@ -616,7 +616,9 @@ export default function App() {
                         {l: "Top-P", f: "top_p", s: 0.01, u: "use_top_p"},
                         {l: "Top-K", f: "top_k", s: 1, u: "use_top_k"},
                         {l: "Min-P", f: "min_p", s: 0.01, u: "use_min_p"},
-                        {l: t("repeat_penalty"), f: "repeat_penalty", s: 0.05, u: "use_repeat_penalty"}
+                        {l: t("repeat_penalty"), f: "repeat_penalty", s: 0.05, u: "use_repeat_penalty"},
+                        {l: t("batch_size"), f: "batch_size", s: 8, u: "use_batch_size"},
+                        {l: t("ubatch_size"), f: "ubatch_size", s: 8, u: "use_ubatch_size"}
                       ].map(p => (
                         <div key={p.f} className={cn("space-y-1.5 transition-opacity", !(activeProfile as any)[p.u] && "opacity-40")}>
                           <label 
@@ -628,33 +630,11 @@ export default function App() {
                           <input 
                             type="number" step={p.s} value={(activeProfile as any)[p.f]} 
                             disabled={!(activeProfile as any)[p.u]}
-                            onChange={(e) => updateProfileField(activeProfile.id, p.f as any, p.f === 'top_k' ? parseInt(e.target.value) : parseFloat(e.target.value))}
+                            onChange={(e) => updateProfileField(activeProfile.id, p.f as any, ['top_k', 'batch_size', 'ubatch_size'].includes(p.f) ? parseInt(e.target.value) : parseFloat(e.target.value))}
                             className="w-full bg-background border border-border/60 rounded-xl px-3 py-2 text-xs font-mono font-bold outline-none focus:ring-2 focus:ring-primary/20 transition-all text-foreground disabled:opacity-50" 
                           />
                         </div>
                       ))}
-
-                      <div className="col-span-2 grid grid-cols-2 gap-2 p-2 bg-orange-500/5 border border-orange-500/20 rounded-2xl">
-                        {[
-                          {l: t("batch_size"), f: "batch_size", s: 8, u: "use_batch_size"},
-                          {l: t("ubatch_size"), f: "ubatch_size", s: 8, u: "use_ubatch_size"}
-                        ].map(p => (
-                           <div key={p.f} className={cn("space-y-1 transition-opacity", !(activeProfile as any)[p.u] && "opacity-40")}>
-                              <label 
-                                className="text-[9px] font-bold text-muted-foreground uppercase ml-1 tracking-tighter truncate block cursor-pointer select-none"
-                                onClick={() => updateProfileField(activeProfile.id, p.u as any, !(activeProfile as any)[p.u])}
-                              >
-                                <span className={cn((activeProfile as any)[p.u] ? "text-orange-500" : "line-through")}>{p.l}</span>
-                              </label>
-                              <input 
-                                type="number" step={p.s} value={(activeProfile as any)[p.f]} 
-                                disabled={!(activeProfile as any)[p.u]}
-                                onChange={(e) => updateProfileField(activeProfile.id, p.f as any, parseInt(e.target.value))}
-                                className="w-full bg-background border border-border/60 rounded-xl px-2 py-1.5 text-xs font-mono font-bold outline-none focus:ring-2 focus:ring-orange-500/20 transition-all text-foreground disabled:opacity-50" 
-                              />
-                           </div>
-                        ))}
-                      </div>
                     </div>
                   </div>
                 </div>
