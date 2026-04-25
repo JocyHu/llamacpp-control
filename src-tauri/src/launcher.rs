@@ -106,7 +106,9 @@ fn generate_ini_content(profile: &Profile, detected: &[DetectedModel]) -> String
         ini_content.push_str(&format!("batch-size = {}\n", profile.batch_size));
     }
     
-    ini_content.push_str(&format!("ubatch-size = {}\n", profile.ubatch_size));
+    if profile.use_ubatch_size {
+        ini_content.push_str(&format!("ubatch-size = {}\n", profile.ubatch_size));
+    }
     if !profile.cache_type_k.is_empty() { ini_content.push_str(&format!("cache-type-k = {}\n", profile.cache_type_k)); }
     if !profile.cache_type_v.is_empty() { ini_content.push_str(&format!("cache-type-v = {}\n", profile.cache_type_v)); }
     ini_content.push_str(&format!("jinja = {}\n", if profile.jinja { "true" } else { "false" }));
@@ -160,7 +162,9 @@ fn push_profile_args(args: &mut Vec<String>, profile: &Profile) {
         args.push("--batch-size".to_string()); args.push(profile.batch_size.to_string());
     }
     
-    args.push("--ubatch-size".to_string()); args.push(profile.ubatch_size.to_string());
+    if profile.use_ubatch_size {
+        args.push("--ubatch-size".to_string()); args.push(profile.ubatch_size.to_string());
+    }
     
     if profile.use_temp {
         args.push("--temp".to_string()); args.push(profile.temp.to_string());
