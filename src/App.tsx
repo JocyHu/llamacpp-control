@@ -380,6 +380,22 @@ export default function App() {
                     {config.settings.server_executable && <button onClick={() => handleUpdateConfig({ ...config, settings: { ...config.settings, server_executable: null }})} className="p-3 bg-red-500/10 text-red-500 rounded-2xl hover:bg-red-500/20 transition-all"><X className="w-4 h-4" /></button>}
                   </div>
                 </div>
+
+                <div className="flex items-center justify-between p-4 bg-secondary/20 rounded-2xl border border-border/40">
+                  <div className="space-y-0.5">
+                    <div className="text-sm font-bold">{t("enable_mmproj_label")}</div>
+                    <div className="text-[10px] text-muted-foreground">{t("enable_mmproj_hint")}</div>
+                  </div>
+                  <div 
+                    onClick={() => handleUpdateConfig({
+                      ...config, 
+                      global: { ...config.global, enable_mmproj_default: !config.global.enable_mmproj_default }
+                    })} 
+                    className={cn("w-12 h-6 rounded-full p-1 cursor-pointer transition-colors", config.global.enable_mmproj_default ? "bg-primary" : "bg-muted-foreground/30")}
+                  >
+                    <div className={cn("w-4 h-4 bg-white rounded-full transition-transform duration-200", config.global.enable_mmproj_default ? "translate-x-6" : "translate-x-0")} />
+                  </div>
+                </div>
               </section>
               <section className="space-y-6 pt-6 border-t border-dashed border-border/60 pb-6 text-foreground">
                 <div className="flex items-center gap-3 text-primary"><History className="w-5 h-5" /><h4 className="font-black text-sm uppercase tracking-wider">{t("log_group")}</h4></div>
