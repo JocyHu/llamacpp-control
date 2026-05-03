@@ -522,13 +522,61 @@ export default function App() {
                   <div className="space-y-5 text-foreground">
                     {activeProfile.launcher_mode === "single" && (
                       <><div className="space-y-2"><label className="text-[10px] font-bold text-muted-foreground uppercase px-1 tracking-tight">{t("model_file")}</label><div className="flex gap-2"><input value={activeProfile.model_path} onChange={(e) => updateProfileField(activeProfile.id, "model_path", e.target.value)} className="flex-1 bg-secondary/20 border border-border/60 rounded-2xl px-4 py-3 text-sm focus:ring-2 focus:ring-primary/20 outline-none text-foreground" placeholder={t("select_path")} /><button onClick={() => handleBrowse("file", "model_path")} className="px-4 bg-secondary rounded-2xl hover:bg-primary hover:text-white transition-all"><FolderOpen className="w-5 h-5" /></button></div></div>
-                        <div className="space-y-2 pt-2 border-t border-dashed border-border/60 text-foreground"><label className="text-[10px] font-bold text-muted-foreground uppercase px-1 tracking-tight">{t("vision_proj")}</label><div className="flex gap-2 text-foreground"><input value={activeProfile.mmproj_path || ""} onChange={(e) => updateProfileField(activeProfile.id, "mmproj_path", e.target.value || null)} className="flex-1 bg-secondary/20 border border-border/60 rounded-2xl px-4 py-2.5 text-xs outline-none text-foreground" placeholder="Optional..." /><button onClick={() => handleBrowse("file", "mmproj_path")} className="px-3 bg-secondary rounded-xl hover:bg-primary hover:text-white transition-all text-foreground"><FolderOpen className="w-4 h-4" /></button></div></div>
+                        <div className={cn("space-y-2 pt-2 border-t border-dashed border-border/60 text-foreground transition-opacity", !activeProfile.enable_mmproj && "opacity-50")}>
+                          <label className="text-[10px] font-bold text-muted-foreground uppercase px-1 tracking-tight flex items-center justify-between">
+                            <span>{t("vision_proj")}</span>
+                            <div className="flex items-center gap-1.5">
+                              <input 
+                                type="checkbox" 
+                                checked={activeProfile.enable_mmproj} 
+                                onChange={(e) => updateProfileField(activeProfile.id, "enable_mmproj", e.target.checked)} 
+                                className="w-3 h-3 rounded" 
+                              />
+                              <span className="text-[9px] text-primary font-bold">{t("enable_mmproj_label")}</span>
+                            </div>
+                          </label>
+                          <div className="flex gap-2 text-foreground">
+                            <input 
+                              value={activeProfile.mmproj_path || ""} 
+                              onChange={(e) => updateProfileField(activeProfile.id, "mmproj_path", e.target.value || null)} 
+                              className="flex-1 bg-secondary/20 border border-border/60 rounded-2xl px-4 py-2.5 text-xs outline-none text-foreground" 
+                              placeholder="Optional..." 
+                              disabled={!activeProfile.enable_mmproj}
+                            />
+                            <button 
+                              onClick={() => handleBrowse("file", "mmproj_path")} 
+                              disabled={!activeProfile.enable_mmproj}
+                              className="px-3 bg-secondary rounded-xl hover:bg-primary hover:text-white transition-all text-foreground disabled:opacity-50"
+                            >
+                              <FolderOpen className="w-4 h-4" />
+                            </button>
+                          </div>
+                        </div>
                       </>
                     )}
                     {activeProfile.launcher_mode === "dir" && (
-                      <div className="space-y-2 bg-blue-500/5 p-4 rounded-3xl border border-blue-500/10 transition-colors text-foreground"><label className="text-[10px] font-bold text-blue-600 uppercase px-1 flex items-center gap-2"><FolderTree className="w-3.5 h-3.5" /> {t("models_dir")}</label>
-                        <div className="flex gap-2 mt-2"><input value={activeProfile.models_dir || ""} onChange={(e) => updateProfileField(activeProfile.id, "models_dir", e.target.value || null)} className="flex-1 bg-white/50 dark:bg-black/20 border-none rounded-2xl px-4 py-3 text-sm focus:ring-2 focus:ring-blue-500/20 outline-none text-foreground" placeholder={t("select_path")} /><button onClick={() => handleBrowse("directory", "models_dir")} className="px-4 bg-blue-500 text-white rounded-2xl hover:bg-blue-600 transition-all shadow-lg text-foreground"><FolderTree className="w-5 h-5" /></button></div>
-                        <p className="text-[9px] text-blue-600/70 italic px-1 mt-2 text-foreground">{t("dir_hint")}</p>
+                      <div className="space-y-4 bg-blue-500/5 p-4 rounded-3xl border border-blue-500/10 transition-colors text-foreground">
+                        <div className="space-y-2">
+                          <label className="text-[10px] font-bold text-blue-600 uppercase px-1 flex items-center gap-2">
+                            <FolderTree className="w-3.5 h-3.5" /> {t("models_dir")}
+                          </label>
+                          <div className="flex gap-2 mt-2">
+                            <input value={activeProfile.models_dir || ""} onChange={(e) => updateProfileField(activeProfile.id, "models_dir", e.target.value || null)} className="flex-1 bg-white/50 dark:bg-black/20 border-none rounded-2xl px-4 py-3 text-sm focus:ring-2 focus:ring-blue-500/20 outline-none text-foreground" placeholder={t("select_path")} />
+                            <button onClick={() => handleBrowse("directory", "models_dir")} className="px-4 bg-blue-500 text-white rounded-2xl hover:bg-blue-600 transition-all shadow-lg text-foreground">
+                              <FolderTree className="w-5 h-5" />
+                            </button>
+                          </div>
+                          <p className="text-[9px] text-blue-600/70 italic px-1 mt-1 text-foreground">{t("dir_hint")}</p>
+                        </div>
+                        <div className="pt-2 border-t border-blue-500/10 flex items-center justify-between px-1">
+                          <span className="text-[10px] font-bold text-blue-600/80 uppercase">{t("auto_vision_label")}</span>
+                          <div 
+                            onClick={() => updateProfileField(activeProfile.id, "enable_mmproj", !activeProfile.enable_mmproj)} 
+                            className={cn("w-10 h-5 rounded-full p-1 cursor-pointer transition-colors", activeProfile.enable_mmproj ? "bg-blue-500" : "bg-muted-foreground/30")}
+                          >
+                            <div className={cn("w-3 h-3 bg-white rounded-full transition-transform duration-200", activeProfile.enable_mmproj ? "translate-x-5" : "translate-x-0")} />
+                          </div>
+                        </div>
                       </div>
                     )}
                     {activeProfile.launcher_mode === "preset" && (
