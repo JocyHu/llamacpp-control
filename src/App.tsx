@@ -205,6 +205,7 @@ export default function App() {
       use_batch_size: true,
       use_ubatch_size: false,
       custom_args: null,
+      enable_mmproj: config.global.enable_mmproj_default,
     };
     const newConfig: AppConfig = { 
       ...config, 

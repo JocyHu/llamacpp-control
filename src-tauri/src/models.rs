@@ -17,6 +17,7 @@ pub struct GlobalConfig {
     pub api_key: String,
     pub sleep_idle_seconds: u32,
     pub mlock: bool,
+    pub enable_mmproj_default: bool,
 }
 
 #[derive(Debug, Serialize, Deserialize, Clone, Default)]
@@ -52,6 +53,7 @@ pub struct Profile {
     pub use_batch_size: bool,
     pub use_ubatch_size: bool,
     pub custom_args: Option<String>, // 新增：自定义高级参数
+    pub enable_mmproj: bool,
 }
 
 #[derive(Debug, Serialize, Deserialize, Clone)]
@@ -79,6 +81,7 @@ impl Default for AppConfig {
                 api_key: "".to_string(),
                 sleep_idle_seconds: 600,
                 mlock: false,
+                enable_mmproj_default: true,
             },
             profiles: vec![],
             current_profile_id: None,

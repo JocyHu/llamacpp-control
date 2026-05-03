@@ -13,6 +13,7 @@ export interface GlobalConfig {
   api_key: string;
   sleep_idle_seconds: number;
   mlock: boolean;
+  enable_mmproj_default: boolean;
 }
 
 export interface Profile {
@@ -59,6 +60,7 @@ export interface Profile {
   
   // 自定义高级参数
   custom_args: string | null;
+  enable_mmproj: boolean;
 }
 
 export interface AppConfig {
