@@ -185,11 +185,13 @@ fn push_profile_args(args: &mut Vec<String>, profile: &Profile) {
         args.push("--repeat-penalty".to_string()); args.push(profile.repeat_penalty.to_string());
     }
     
-    if let Some(ref mm) = profile.mmproj_path { 
-        if !mm.is_empty() { 
-            args.push("--mmproj".to_string()); 
-            args.push(mm.replace("\\", "/")); 
-        } 
+    if profile.enable_mmproj {
+        if let Some(ref mm) = profile.mmproj_path { 
+            if !mm.is_empty() { 
+                args.push("--mmproj".to_string()); 
+                args.push(mm.replace("\\", "/")); 
+            } 
+        }
     }
     
     if profile.jinja { args.push("--jinja".to_string()); } else { args.push("--no-jinja".to_string()); }
