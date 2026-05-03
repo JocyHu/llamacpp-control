@@ -128,7 +128,9 @@ fn generate_ini_content(profile: &Profile, detected: &[DetectedModel]) -> String
         used_aliases.insert(unique_slug.clone());
         ini_content.push_str(&format!("\n[{}]\n", unique_slug));
         ini_content.push_str(&format!("model = {}\n", m.model_path.to_string_lossy().replace("\\", "/")));
-        if let Some(ref mm) = m.mmproj_path { ini_content.push_str(&format!("mmproj = {}\n", mm.to_string_lossy().replace("\\", "/"))); }
+        if profile.enable_mmproj {
+            if let Some(ref mm) = m.mmproj_path { ini_content.push_str(&format!("mmproj = {}\n", mm.to_string_lossy().replace("\\", "/"))); }
+        }
     }
     ini_content
 }
