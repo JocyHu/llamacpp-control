@@ -50,7 +50,7 @@ fn extract_quant(file_name: &str) -> Option<String> {
     None
 }
 
-fn scan_directory(base_dir: &Path) -> Vec<DetectedModel> {
+fn scan_directory(base_dir: &Path, enable_mmproj: bool) -> Vec<DetectedModel> {
     let mut models = Vec::new();
     let all_files: Vec<PathBuf> = WalkDir::new(base_dir)
         .into_iter()
@@ -72,7 +72,14 @@ fn scan_directory(base_dir: &Path) -> Vec<DetectedModel> {
         let parent_dir_name = model_path.parent().and_then(|p| p.file_name()).and_then(|s| s.to_str()).unwrap_or("model");
         let alias_base = if model_path.parent() != Some(base_dir) && parent_dir_name.to_uppercase() != "GGUF" { parent_dir_name.to_string() } else { file_name.replace(".gguf", "") };
         let quant_tag = extract_quant(file_name);
-        models.push(DetectedModel { alias_base, quant_tag, model_path: model_path.clone(), mmproj_path: mmprojs.iter().find(|m| m.parent() == model_path.parent()).cloned() });
+        
+        let mmproj_path = if enable_mmproj {
+            mmprojs.iter().find(|m| m.parent() == model_path.parent()).cloned()
+        } else {
+            None
+        };
+        
+        models.push(DetectedModel { alias_base, quant_tag, model_path: model_path.clone(), mmproj_path });
     }
     models
 }
@@ -222,7 +229,7 @@ pub async fn preview_launch_arguments(_app: AppHandle, config: AppConfig, profil
     match profile.launcher_mode.as_str() {
         "dir" => {
             let dir_str = profile.models_dir.as_ref().ok_or("NoDir")?;
-            let detected = scan_directory(Path::new(dir_str));
+            let detected = scan_directory(Path::new(dir_str), profile.enable_mmproj);
             ini_content = Some(generate_ini_content(profile, &detected));
             args.push("--models-preset".to_string());
             args.push("[AUTO_GENERATED_INI]".to_string());
@@ -285,7 +292,7 @@ pub async fn start_server(app: AppHandle, config: AppConfig, profile_id: String,
     match profile.launcher_mode.as_str() {
         "dir" => {
             let dir_str = profile.models_dir.as_ref().ok_or("NoDir")?;
-            let detected = scan_directory(Path::new(dir_str));
+            let detected = scan_directory(Path::new(dir_str), profile.enable_mmproj);
             if detected.is_empty() { return Err("NoModels".to_string()); }
             let ini_content = generate_ini_content(&profile, &detected);
             let cache_dir = app.path().app_cache_dir().map_err(|e| e.to_string())?;
