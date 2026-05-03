@@ -33,6 +33,9 @@ export const translations = {
     models_preset: "配置文件预设 (.ini)",
     chat_template: "对话模板 (Jinja2)",
     force_enable: "强制启用",
+    enable_mmproj_label: "启用视觉模型加载",
+    enable_mmproj_hint: "决定是否将视觉投影文件 (mmproj) 传递给服务器",
+    auto_vision_label: "自动识别视觉组件",
     dir_hint: "提示：将自动递归识别目录内所有模型并生成路由。",
     select_path: "选择路径...",
     
@@ -122,6 +125,9 @@ export const translations = {
     models_preset: "Config Preset (.ini)",
     chat_template: "Chat Template (Jinja2)",
     force_enable: "Force On",
+    enable_mmproj_label: "Enable Vision Model",
+    enable_mmproj_hint: "Whether to pass the vision projection (mmproj) to the server",
+    auto_vision_label: "Auto Vision Discovery",
     dir_hint: "Hint: Automatically scans subdirs and generates router config.",
     select_path: "Select path...",
     
